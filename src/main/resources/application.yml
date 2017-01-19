@@ -1,0 +1,42 @@
+logging:
+  pattern:
+    console: "Datetime:%d{yyyy-MM-dd'T'HH:mm:ssZ} [%level] [%thread] %logger  message:%msg%n"
+  level:
+    root: debug
+    org.apache: error
+    org.springframework: error
+    org.hibernate: error
+    com.zaxxer.hikari: debug
+
+spring:
+  profiles:
+    active: development
+---
+spring:
+  profile: development
+  datasource:
+    primary:
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:postgresql://localhost:5432/test
+      driver-class-name: org.postgresql.Driver
+      username: test1
+      password: test1
+      connectionTestQuery: SELECT 1
+      minimumIdle: 1
+      maximumPoolSize: 3
+      poolName: pool-one
+      idleTimeout: 10000
+      maxLifetime: 30000
+    
+    secondary:
+      type: com.zaxxer.hikari.HikariDataSource
+      jdbcUrl: jdbc:postgresql://localhost:5432/test
+      driver-class-name: org.postgresql.Driver
+      username: test2
+      password: test2
+      connectionTestQuery: SELECT 1
+      minimumIdle: 1
+      maximumPoolSize: 3
+      poolName: pool-two
+      idleTimeout: 10000
+      maxLifetime: 30000
